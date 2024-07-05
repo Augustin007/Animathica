@@ -1,12 +1,16 @@
 # Animathica
 Animated math calculator based on Alan Becker's [Animation Vs Math](https://www.youtube.com/watch?v=B1J6Ou4q8vE&ab_channel=AlanBecker)
 
-I've opened up [discussions](https://github.com/Augustin007/Animathica/discussions). Stuff happens there for now.
+---
 
-Nothing to see here just yet.
+See the [discord](https://discord.gg/CQnvNZPefv) for updates.
 
-My default language for proof-of-concepts is Python because I am very familiar with the language. I thought about Lisp, which I've found I also really like, but I think building a game is one of the places where Object-Oriented programming does better.
+Nothing much to see here just yet.
 
-So I'm probably just going to start with Python. Things might change as I see how the project goes.
+Working alongside [Quantodeluz](https://github.com/Quantodeluz).
 
-I'm not at all familiar with anything to do with graphics. 
+General idea: 
+
+We have some workspace where you can put symbols you have, or combine them into new symbols. You can use these symbols to build mathematical expressions which the system calculates.
+
+
