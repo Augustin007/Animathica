@@ -69,6 +69,11 @@ def compute(expr, namespace):
 
 if __name__ == '__main__':
     mns = math_namespace()
+    # Function : Type = Type( ... )
+    # Nat : Type = Type ( Zero=(0, Nat), Succ: =lambda n:n+1 )
+    # Zero : Nat = Nat.Zero
+    # One : Nat = Nat.Succ(Zero)
+    # Plus : Function = 
     Plus = math_symbol('+', 2, lambda a,b:a+b, mns, '$0$+$1$', '{$0$}+{$1$}', (), ())
     # Test = expression_wrapper(('+', 1, ('+', 1, 2)), mns)
     # str(Test)
