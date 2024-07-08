@@ -5,21 +5,29 @@ from operator import add, mul, call
 from abc import abstractmethod
 
 class expression:
-    __add__ = lambda self, other: addition(self, other)
+    __radd__ = __add__ = lambda self, other: addition(self, other)
     __sub__ = lambda self, other: addition(self, multiplication(other, -1))
-    __mul__ = lambda self, other: multiplication(self, other)
+    __rsub__ = lambda self, other: addition(multiplication(self, -1), other)
+    __rmul__ = __mul__ = lambda self, other: multiplication(self, other)
     __truediv__ = lambda self, other: multiplication(self, exponentiation(other,-1))
+    __rtrudediv__ = lambda self, other: multiplication(exponentiation(self, -1), other)
     __pow__ = lambda self, other: exponentiation(self, other)
+    __rpow__ = lambda self, other: exponentiation(other, self)
     def simplify(self):
         return self
     def on_simplify(self):
         return self
 
-def safe(a)->expression:
+def safe(*element):
+    if len(element) != 1:
+        return map(safe, element)
+    a = element[0]
     if isinstance(a, Number):
         return number(a)
     if isinstance(a, expression):
         return a
+    if isinstance(a, str):
+        return variable(a)
     return a
 
 class binary_operation(expression):
@@ -107,7 +115,7 @@ def flatten(this, over, that):
     if isinstance(this, over):
         return (*flatten(this.a, over, that), *flatten(this.b, over, that))
     if isinstance(this, that):
-        return (*that.simplify().items,)
+        return (*this.simplify().items,)
     return (this.simplify(),)
 variables: dict[str, variable] = {}
 
@@ -129,21 +137,18 @@ class semiring(expression):
         constant = self.inner.identity
         new: list = []
         while items:
-            print(f'A: {items}, {new}')
             numb, expression = items.pop()
             if isinstance(expression, number):
                 constant = self.inner.compute(constant, expression)
                 continue
             index = 0
             for num, expr in items.copy():
-                print(f'B: {items}')
                 if expr == expression:
                     items.pop(index)
                     numb += num
                     continue
                 index += 1
             new.append(self.outer(expression, numb.simplify()).simplify())
-        print(f'C: {new}')
         if constant!= self.inner.identity:
             new.append(constant.simplify())
         return self.__class__(*new)
@@ -221,6 +226,4 @@ class mul_pow(semiring):
         if isinstance(item, exponentiation):
             return item.b, item.a
         return number(1), item
-
-
 
