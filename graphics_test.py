@@ -32,6 +32,7 @@ class CanvasApp:
         text = self.ax.text(x, y, f'${latex_str}$', fontsize=15, rotation=rotation, color='white', ha='center', va='center', picker=True)
         self.texts[text] = {"drag": False, "rotate": False}
         self.canvas.draw()
+        return text
         
     def despawn(self, text):
         text.remove()
@@ -79,10 +80,20 @@ class CanvasApp:
             self.start_angle = event.x
             self.canvas.draw()
 
+def mainloop():
+    '''
+    for text in app.texts:
+        in_line = detect_in_line(text, app.texts)
+        data = convert_line(in_line)
+        data.replace(data.simplify())
+    '''
+    root.update()
+    root.update_idletasks()
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = CanvasApp(root)
     app.spawn(r'\int_{a}^{b} f(x)\,dx', 0.2, 0.8)
     app.spawn(r'e^{i\pi} + 1 = 0', 0.5, 0.5)
-    root.mainloop()
+    mainloop()
 
