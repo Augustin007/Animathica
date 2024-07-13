@@ -81,12 +81,9 @@ class CanvasApp:
             self.canvas.draw()
 
 def mainloop():
-    '''
-    for text in app.texts:
-        in_line = detect_in_line(text, app.texts)
-        data = convert_line(in_line)
-        data.replace(data.simplify())
-    '''
+    # lines = gather_lines(app.texts) : Uses positions and symbols to convert spawned symbols to nested structure according to lines in order of operations [[4,+,1],=,[2,+,3]] # Only do updating symbols?
+    # When it requires calculation, CAS(line) which converts it into a CAS object.
+
     root.update()
     root.update_idletasks()
 
