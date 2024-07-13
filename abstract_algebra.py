@@ -1,15 +1,17 @@
 from typing import TypeVar
 from types import Callable
 
+A = TypeVar('A')
+
 class expression:
     pass
 
 class magma(expression):
-    compute: FunctionType[[A,A], A]
+    compute: Callable[[A,A], A]
     abelian: bool
 
 class quasigroup(magma):
-    divisibility: FunctionType[[A,A], A]
+    divisibility: Callable[[A,A], A]
 
 class unital_magma(magma):
     identity: A
