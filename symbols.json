@@ -1,0 +1,14 @@
+{
+	"Digits":{
+		"positions": "Somehow encode relative positions/rotations/stuff here",
+		"rules": "Somehow encode rules onto here. (Numbers might be inbuilt while other more abstract ones aren't.)",
+		"characters":"0123456789"
+	},
+	"Operations":{
+		"positions": "Same as above. Somehow encode infix operators",
+		"characters":{
+			"character":"+",
+			"rule": "Encode addition or make it built in?"
+		}
+	}
+}

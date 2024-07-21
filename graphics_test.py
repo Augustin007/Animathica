@@ -92,5 +92,5 @@ if __name__ == "__main__":
     app = CanvasApp(root)
     app.spawn(r'\int_{a}^{b} f(x)\,dx', 0.2, 0.8)
     app.spawn(r'e^{i\pi} + 1 = 0', 0.5, 0.5)
-    mainloop()
+    #mainloop()
 
