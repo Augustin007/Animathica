@@ -66,7 +66,7 @@ Tentative.
 ## Folder Structure
 ```
 Animathica
-|- __main__.py   # Handles system arguments (sys.vargs)
+|- __main__.py   # Handles system arguments (sys.argv)
 |- Main/         # Folder where main menu and related components are kept (Flow of the game)
 |- Canvas/       # Folder where all the graphics and controls on the blackboard are handled by the front-end (Math space)
 |- Levels/       # Folder where levels are stored
