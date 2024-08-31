@@ -3,7 +3,7 @@ from numbers import Number
 from fractions import Fraction
 from operator import add, mul, call
 from abc import abstractmethod
-from ..logger import log, log_function, log_class, logging
+from ..logger import log, log_function, log_class, logging, log_skip
 
 @log_class(logging.INFO)
 class expression:

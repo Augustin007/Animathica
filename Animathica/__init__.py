@@ -1,1 +1,3 @@
-from Calculator import *
+import logging
+logging.basicConfig(level=0)
+from .Calculator import *
