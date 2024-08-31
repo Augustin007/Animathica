@@ -119,6 +119,9 @@ class variable(expression):
 
 @log_function(logging.INFO)
 def flatten(this, over, that):
+    '''
+    flattens instances of inner over instances of the outer
+    '''
     if isinstance(this, over):
         return (*flatten(this.a, over, that), *flatten(this.b, over, that))
     if isinstance(this, that):

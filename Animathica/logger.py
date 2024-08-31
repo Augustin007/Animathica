@@ -51,6 +51,8 @@ def log_class(level: int):
                     continue
             if attr_name in ('__str__', '__repr__'):
                 continue
+            if isinstance(attr_value, type):
+                continue
             if callable(attr_value):
                 decorated_attr = log_function(level)(attr_value)
                 setattr(cls, attr_name, decorated_attr)
