@@ -1,7 +1,2 @@
-# created by virtualenv automatically
-bin
-lib
-lib64
-share
-pyvenv.cfg
+*.egg-info
 __pycache__
