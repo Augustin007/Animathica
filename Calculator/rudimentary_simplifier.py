@@ -3,7 +3,9 @@ from numbers import Number
 from fractions import Fraction
 from operator import add, mul, call
 from abc import abstractmethod
+from ..logger import log, log_function, log_class, logging
 
+@log_class(logging.INFO)
 class expression:
     __radd__ = __add__ = lambda self, other: addition(self, other)
     __sub__ = lambda self, other: addition(self, multiplication(other, -1))
@@ -18,6 +20,7 @@ class expression:
     def on_simplify(self):
         return self
 
+@log_function(logging.INFO)
 def safe(*element):
     if len(element) != 1:
         return map(safe, element)
@@ -30,6 +33,7 @@ def safe(*element):
         return variable(a)
     return a
 
+@log_class(logging.INFO)
 class binary_operation(expression):
     a: expression
     b: expression
@@ -70,6 +74,7 @@ class binary_operation(expression):
             return False
         return sself == sother
 
+@log_class(logging.INFO)
 class number(expression):
     def __init__(self, value):
         if int(value) == value:
@@ -87,6 +92,7 @@ class number(expression):
             return self.value == sother.value
         return False
 
+@log_class(logging.INFO)
 class variable(expression):
     name: str
     constant: bool
@@ -111,6 +117,7 @@ class variable(expression):
             return self.name == sother.name
         return False
 
+@log_function(logging.INFO)
 def flatten(this, over, that):
     if isinstance(this, over):
         return (*flatten(this.a, over, that), *flatten(this.b, over, that))
@@ -119,6 +126,7 @@ def flatten(this, over, that):
     return (this.simplify(),)
 variables: dict[str, variable] = {}
 
+@log_class(logging.INFO)
 class semiring(expression):
     inner: Any
     outer: Any
@@ -177,6 +185,7 @@ class addition(binary_operation):
     infix = '+'
     identity = number(0)
 
+    @log_function(logging.INFO)
     def on_simplify(self):
         return add_mul(self).simplify()
 
@@ -185,9 +194,11 @@ class multiplication(binary_operation):
     infix = '*'
     identity = number(1)
 
+    @log_function(logging.INFO)
     def on_simplify(self):
         return mul_pow(self).simplify()
 
+@log_class(logging.INFO)
 class exponentiation(binary_operation):
     compute = pow
     infix = '**'
@@ -195,12 +206,14 @@ class exponentiation(binary_operation):
         if self.b == number(1):
             return self.a
 
+@log_class(logging.INFO)
 class nest(binary_operation):
     compute = call
     infix = ''
     def on_init(self):
         assert isinstance(self.a, function)
 
+@log_class(logging.INFO)
 class function:
     def __init__(self, func, safe_func):
         self.func = func
@@ -209,6 +222,7 @@ class function:
     def __repr__(self):
         return self.func.__name__
 
+@log_class(logging.INFO)
 class add_mul(semiring):
     inner = addition
     outer = multiplication
@@ -218,6 +232,7 @@ class add_mul(semiring):
                 return item.items[-1], mul_pow(*item.items[:-1])
         return number(1), item
 
+@log_class(logging.INFO)
 class mul_pow(semiring):
     inner = multiplication
     outer = exponentiation
