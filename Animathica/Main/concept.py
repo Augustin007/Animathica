@@ -63,8 +63,10 @@ class AnimathicaDemo:
         except Exception as e:
             print(f"Error evaluating expression: {e}")
 
-if __name__ == "__main__":
+def Demo():
     root = tk.Tk()
     app = AnimathicaDemo(root)
     root.mainloop()
 
+if __name__ == "__main__":
+    Demo()

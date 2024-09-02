@@ -11,3 +11,14 @@ from .rudimentary_simplifier import *
 
 x, y, z = safe(*'xyz')
 
+def Calculator_Test():
+    while (Special:=input()):
+        try:
+            Special = eval(Special)
+            if isinstance(Special, expression):
+                Special = Special.simplify()
+            print(repr(Special))
+        except Exception as e:
+            print(e)
+    return
+
